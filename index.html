@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>بن عابدين | Abdeen Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&family=Aref+Ruqaa:wght@700&family=Fraunces:ital,wght@0,300;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --kraft:#c9a06a;
+    --kraft-dark:#8a6a41;
+    --espresso:#241209;
+    --espresso-deep:#160b05;
+    --gold:#c99a4a;
+    --gold-bright:#e6bd75;
+    --cream:#f3e7d4;
+    --cream-dim:#d9c6a9;
+    --glass: rgba(22, 11, 5, 0.55);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html,body{height:100%;}
+
+  body{
+    min-height:100svh;
+    font-family:'Tajawal', 'Jost', sans-serif;
+    color:var(--cream);
+    background:#000;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---------- BACKGROUND ---------- */
+  .bg{
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(15,8,4,0.55) 0%, rgba(16,9,4,0.35) 35%, rgba(10,6,3,0.65) 68%, rgba(8,4,2,0.94) 100%),
+      url("bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: saturate(1.05) contrast(1.02);
+    transform: scale(1.06);
+    z-index:-2;
+  }
+  .grain{
+    position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ---------- LANG TOGGLE ---------- */
+  .lang-toggle{
+    position:fixed;
+    top:22px;
+    inset-inline-end:22px;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:var(--glass);
+    border:1px solid rgba(230,189,117,0.45);
+    backdrop-filter:blur(8px);
+    border-radius:999px;
+    padding:6px;
+  }
+  .lang-toggle button{
+    font-family:'Jost',sans-serif;
+    font-size:12.5px;
+    letter-spacing:.12em;
+    background:transparent;
+    border:none;
+    color:var(--cream-dim);
+    padding:7px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:all .35s ease;
+  }
+  .lang-toggle button.active{
+    background:linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color:#241209;
+    font-weight:700;
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 100px 22px 56px;
+    position:relative;
+    z-index:1;
+  }
+
+  /* signature ring badge, echoes the cup logo */
+  .badge{
+    width:112px;height:112px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    margin-bottom:26px;
+    animation: rise .9s cubic-bezier(.2,.9,.25,1) both, spin 40s linear infinite;
+    animation-delay: 0s, .9s;
+  }
+  .badge::before{
+    content:"";
+    position:absolute; inset:8px;
+    border-radius:50%;
+    border:1px dashed rgba(230,189,117,.55);
+  }
+  .badge .dots{
+    position:absolute; inset:0;
+  }
+  .badge .dots span{
+    position:absolute;
+    width:3px;height:3px;
+    background:var(--gold-bright);
+    border-radius:50%;
+    top:50%;left:50%;
+  }
+  .badge .core{
+    font-family:'Aref Ruqaa','Fraunces',serif;
+    font-size:30px;
+    font-weight:700;
+    color:var(--gold-bright);
+    animation: counterspin 40s linear infinite;
+    line-height:1;
+  }
+
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @keyframes counterspin{ to{ transform:rotate(-360deg); } }
+  @keyframes rise{
+    from{opacity:0; transform:translateY(18px) scale(.9);}
+    to{opacity:1; transform:translateY(0) scale(1);}
+  }
+
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    font-size:12px;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold-bright);
+    opacity:.9;
+    margin-bottom:14px;
+    animation: rise .9s .12s cubic-bezier(.2,.9,.25,1) both;
+  }
+
+  h1{
+    font-size: clamp(2.6rem, 9vw, 4.6rem);
+    line-height:1.05;
+    font-weight:900;
+    color:var(--cream);
+    text-shadow: 0 6px 30px rgba(0,0,0,.55);
+    animation: rise .9s .2s cubic-bezier(.2,.9,.25,1) both;
+    margin-bottom:6px;
+  }
+  h1 .en{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size: clamp(1rem,3.2vw,1.35rem);
+    letter-spacing:.03em;
+    color:var(--gold-bright);
+    margin-top:10px;
+  }
+
+  .tagline{
+    max-width:520px;
+    margin: 18px auto 40px;
+    font-size: clamp(.95rem, 2.4vw, 1.08rem);
+    line-height:1.9;
+    color:var(--cream-dim);
+    font-weight:300;
+    animation: rise .9s .3s cubic-bezier(.2,.9,.25,1) both;
+  }
+
+  .divider{
+    width:64px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 40px;
+    animation: rise .9s .38s cubic-bezier(.2,.9,.25,1) both;
+  }
+
+  /* ---------- LINKS ---------- */
+  .links{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    width:100%;
+    max-width:380px;
+    animation: rise .9s .46s cubic-bezier(.2,.9,.25,1) both;
+  }
+
+  .link-btn{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:16px 22px;
+    border-radius:16px;
+    text-decoration:none;
+    color:var(--cream);
+    background:linear-gradient(180deg, rgba(60,38,20,.55), rgba(30,17,9,.65));
+    border:1px solid rgba(201,160,106,.35);
+    backdrop-filter: blur(6px);
+    position:relative;
+    overflow:hidden;
+    transition: transform .35s cubic-bezier(.2,.9,.25,1), border-color .35s ease, background .35s ease;
+  }
+  .link-btn:active{ transform:scale(.98); }
+  .link-btn:hover{
+    border-color: var(--gold-bright);
+    background:linear-gradient(180deg, rgba(80,52,26,.7), rgba(38,22,11,.78));
+    transform: translateY(-3px);
+  }
+  .link-btn::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(120deg, transparent 30%, rgba(230,189,117,.16) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .8s ease;
+  }
+  .link-btn:hover::after{ transform: translateX(120%); }
+
+  .icon{
+    width:38px; height:38px;
+    min-width:38px;
+    border-radius:50%;
+    background: rgba(230,189,117,.12);
+    border:1px solid rgba(230,189,117,.5);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .icon svg{ width:18px; height:18px; fill:var(--gold-bright); }
+
+  .label{
+    flex:1;
+    text-align: start;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .label .t{
+    font-weight:700;
+    font-size:15.5px;
+    letter-spacing:.01em;
+  }
+  .label .s{
+    font-size:11.5px;
+    color:var(--cream-dim);
+    font-family:'Jost',sans-serif;
+    letter-spacing:.06em;
+    opacity:.75;
+  }
+  .arrow{
+    font-size:16px;
+    color:var(--gold-bright);
+    opacity:.7;
+    transition:transform .35s ease;
+  }
+  html[dir="rtl"] .arrow{ transform:scaleX(-1); }
+  .link-btn:hover .arrow{ transform: translateX(4px); }
+  html[dir="rtl"] .link-btn:hover .arrow{ transform: scaleX(-1) translateX(4px); }
+
+  footer{
+    margin-top:52px;
+    font-family:'Jost',sans-serif;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:rgba(217,198,169,.55);
+    animation: rise .9s .55s cubic-bezier(.2,.9,.25,1) both;
+  }
+
+  @media (max-width:380px){
+    .wrap{padding-top:90px;}
+    .badge{width:92px;height:92px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button id="btn-ar" class="active" onclick="setLang('ar')">AR</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <main class="wrap">
+
+    <!-- <div class="badge" aria-hidden="true">
+      <div class="dots" id="dots"></div>
+      <div class="core">CM</div>
+    </div> -->
+
+    <p class="eyebrow" data-ar="بن عابدين" data-en="ABDEEN COFFEE">بن عابدين</p>
+
+    <h1>
+      <span data-ar="Coffee Makers" data-en="Coffee Makers">Coffee Makers</span>
+      <span class="en" data-ar="Specialty Coffee Roaster · Barista" data-en="Specialty Coffee Roaster · Barista">Specialty Coffee Roaster · Barista</span>
+    </h1>
+
+    <div class="divider"></div>
+
+    <p class="tagline" data-ar="حبة قهوة، وحكاية طعم لا تتكرر. تابعنا وكن أول من يعرف عروضنا وفعالياتنا." data-en="One bean, one story you won't forget. Follow us and be first to know about our drops and events.">
+      حبة قهوة، وحكاية طعم لا تتكرر. تابعنا وكن أول من يعرف عروضنا وفعالياتنا.
+    </p>
+
+    <nav class="links">
+
+      <a class="link-btn" href="https://instagram.com/abdeencoffee" target="_blank" rel="noopener">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.43.4a4.9 4.9 0 0 1 1.77 1.15 4.9 4.9 0 0 1 1.15 1.77c.16.46.35 1.26.4 2.43.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.4 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.46.16-1.26.35-2.43.4-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.43-.4a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.16-.46-.35-1.26-.4-2.43C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.24-1.97.4-2.43a4.9 4.9 0 0 1 1.15-1.77A4.9 4.9 0 0 1 5.59 2.8c.46-.16 1.26-.35 2.43-.4C9.29 2.34 9.67 2.33 12.87 2.33M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56A7.1 7.1 0 0 0 1.56 2.2 7.1 7.1 0 0 0 .1 4.78C-.2 5.54-.4 6.41-.46 7.69-.52 8.97-.53 9.38-.53 12.6c0 3.24.01 3.65.07 4.93.06 1.28.26 2.15.56 2.91a7.1 7.1 0 0 0 1.64 2.58 7.1 7.1 0 0 0 2.58 1.64c.76.3 1.63.5 2.91.56 1.28.06 1.69.07 4.93.07s3.65-.01 4.93-.07c1.28-.06 2.15-.26 2.91-.56a7.1 7.1 0 0 0 2.58-1.64 7.1 7.1 0 0 0 1.64-2.58c.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.93s-.01-3.65-.07-4.93c-.06-1.28-.26-2.15-.56-2.91A7.1 7.1 0 0 0 22.42 2.2 7.1 7.1 0 0 0 19.84.56C19.08.26 18.21.06 16.93 0 15.65-.06 15.24-.07 12-.07Z" transform="translate(0.53 .07)"/><path d="M12 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Z"/><circle cx="18.4" cy="5.6" r="1.44"/></svg></span>
+        <span class="label">
+          <span class="t" data-ar="إنستغرام" data-en="Instagram">إنستغرام</span>
+          <span class="s" data-ar="تابع أحدث صورنا" data-en="See our latest posts">تابع أحدث صورنا</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="link-btn" href="https://facebook.com/abdeencoffee" target="_blank" rel="noopener">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.24 10.44 22v-7.02H7.9v-2.92h2.54V9.86c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.92h-2.34V22C18.34 21.24 22 17.08 22 12.06Z"/></svg></span>
+        <span class="label">
+          <span class="t" data-ar="فيسبوك" data-en="Facebook">فيسبوك</span>
+          <span class="s" data-ar="صفحتنا الرسمية" data-en="Our official page">صفحتنا الرسمية</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="link-btn" href="https://wa.me/966500000000" target="_blank" rel="noopener">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.46-.15-.65.15-.2.29-.75.93-.92 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.08-.15-.65-1.58-.9-2.16-.24-.57-.48-.5-.65-.5-.17 0-.37-.02-.56-.02-.2 0-.51.08-.78.37-.26.29-1.02 1-1.02 2.44s1.05 2.83 1.2 3.03c.15.2 2.07 3.17 5.03 4.44.7.3 1.25.48 1.68.62.7.22 1.34.19 1.85.12.56-.08 1.7-.7 1.95-1.37.24-.68.24-1.26.17-1.37-.07-.12-.26-.2-.55-.34Z"/><path d="M12.04 2C6.53 2 2.05 6.48 2.05 12c0 1.94.55 3.75 1.5 5.3L2 22l4.84-1.51A9.95 9.95 0 0 0 12.04 22C17.55 22 22 17.52 22 12S17.55 2 12.04 2Zm0 18.13c-1.7 0-3.28-.5-4.6-1.36l-.33-.2-3.05.95.98-2.98-.21-.34a8.1 8.1 0 0 1-1.28-4.4c0-4.5 3.66-8.16 8.17-8.16 4.5 0 8.17 3.65 8.17 8.16 0 4.5-3.66 8.33-8.85 8.33Z"/></svg></span>
+        <span class="label">
+          <span class="t" data-ar="واتساب" data-en="WhatsApp">واتساب</span>
+          <span class="s" data-ar="تواصل معنا مباشرة" data-en="Chat with us directly">تواصل معنا مباشرة</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="link-btn" href="https://maps.app.goo.gl/813P79R2rQdY6Hxf6" target="_blank" rel="noopener">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C7.86 2 4.5 5.36 4.5 9.5c0 5.25 6.5 11.5 7.09 12.06.23.22.59.22.82 0C13 21 19.5 14.75 19.5 9.5 19.5 5.36 16.14 2 12 2Zm0 10.25A2.75 2.75 0 1 1 12 6.75a2.75 2.75 0 0 1 0 5.5Z"/></svg></span>
+        <span class="label">
+          <span class="t" data-ar="موقعنا على الخريطة" data-en="Find us on Google Maps">موقعنا على الخريطة</span>
+          <span class="s" data-ar="احصل على الاتجاهات" data-en="Get directions">احصل على الاتجاهات</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+    </nav>
+
+    <footer data-ar="بن عابدين · محمّصة قهوة مختصة" data-en="Abdeen Coffee · Specialty Coffee Roaster">بن عابدين · محمّصة قهوة مختصة</footer>
+
+  </main>
+
+<script>
+  // decorative bean-dots around the badge ring
+  (function(){
+    var dots = document.getElementById('dots');
+    var n = 10, r = 56;
+    for(var i=0;i<n;i++){
+      var a = (i/n) * Math.PI*2;
+      var x = 56 + r*Math.cos(a);
+      var y = 56 + r*Math.sin(a);
+      var d = document.createElement('span');
+      d.style.left = x+'px';
+      d.style.top = y+'px';
+      dots.appendChild(d);
+    }
+  })();
+
+  function setLang(lang){
+    var html = document.documentElement;
+    var isAr = lang === 'ar';
+    html.setAttribute('lang', isAr ? 'ar':'en');
+    html.setAttribute('dir', isAr ? 'rtl':'ltr');
+    document.body.style.fontFamily = isAr
+      ? "'Tajawal','Jost',sans-serif"
+      : "'Jost','Tajawal',sans-serif";
+
+    document.getElementById('btn-ar').classList.toggle('active', isAr);
+    document.getElementById('btn-en').classList.toggle('active', !isAr);
+
+    document.querySelectorAll('[data-ar]').forEach(function(el){
+      el.textContent = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    });
+
+    localStorage.setItem('abdeen-lang', lang);
+  }
+
+  (function(){
+    var saved = null;
+    try{ saved = localStorage.getItem('abdeen-lang'); }catch(e){}
+    if(saved) setLang(saved);
+  })();
+</script>
+</body>
+</html>
