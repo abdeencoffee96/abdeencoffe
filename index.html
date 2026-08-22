@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -313,7 +313,7 @@
 
     <div class="divider"></div>
 
-    <p class="tagline" data-ar="حبة قهوة، وحكاية طعم لا تتكرر. تابعنا وكن أول من يعرف عروضنا وفعالياتنا." data-en="One bean, one story you won't forget. Follow us and be first to know about our drops and events.">
+    <p class="tagline" data-ar="نقدّم لكم أفضل معدات القهوة وأجود أنواع البن المختارة بعناية، لنمنحكم جودة استثنائية وتجربة قهوة لا تُنسى" data-en="We offer the finest coffee equipment and carefully selected premium coffee beans, bringing you exceptional quality and an unforgettable coffee experience.">
       حبة قهوة، وحكاية طعم لا تتكرر. تابعنا وكن أول من يعرف عروضنا وفعالياتنا.
     </p>
 
@@ -361,7 +361,9 @@
 
   </main>
 
-<script>
+<!-- <script>
+
+
   // decorative bean-dots around the badge ring
   (function(){
     var dots = document.getElementById('dots');
@@ -401,6 +403,93 @@
     try{ saved = localStorage.getItem('abdeen-lang'); }catch(e){}
     if(saved) setLang(saved);
   })();
+</script> -->
+
+<script>
+  // Decorative bean dots
+  (function () {
+    var dots = document.getElementById('dots');
+    var n = 10, r = 56;
+
+    if (dots) {
+      for (var i = 0; i < n; i++) {
+        var a = (i / n) * Math.PI * 2;
+        var x = 56 + r * Math.cos(a);
+        var y = 56 + r * Math.sin(a);
+
+        var d = document.createElement('span');
+        d.style.left = x + 'px';
+        d.style.top = y + 'px';
+
+        dots.appendChild(d);
+      }
+    }
+  })();
+
+
+  function setLang(lang) {
+
+    var html = document.documentElement;
+    var isAr = lang === 'ar';
+
+    // Direction
+    html.setAttribute('lang', isAr ? 'ar' : 'en');
+    html.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+
+    // Font
+    document.body.style.fontFamily = isAr
+      ? "'Tajawal', 'Jost', sans-serif"
+      : "'Jost', 'Tajawal', sans-serif";
+
+    // Language buttons
+    var btnAr = document.getElementById('btn-ar');
+    var btnEn = document.getElementById('btn-en');
+
+    if (btnAr) {
+      btnAr.classList.toggle('active', isAr);
+    }
+
+    if (btnEn) {
+      btnEn.classList.toggle('active', !isAr);
+    }
+
+    // Change all translations
+    document.querySelectorAll('[data-ar][data-en]').forEach(function (el) {
+
+      if (isAr) {
+        el.textContent = el.getAttribute('data-ar');
+      } else {
+        el.textContent = el.getAttribute('data-en');
+      }
+
+    });
+
+    // Save language
+    try {
+      localStorage.setItem('abdeen-lang', lang);
+    } catch (e) {}
+
+  }
+
+
+  // DEFAULT LANGUAGE = ENGLISH
+  (function () {
+
+    var savedLanguage = null;
+
+    try {
+      savedLanguage = localStorage.getItem('abdeen-lang');
+    } catch (e) {}
+
+    // If user already selected a language, use it.
+    // Otherwise English.
+    var language = savedLanguage || 'en';
+
+    setLang(language);
+
+  })();
 </script>
 </body>
+
+
 </html>
